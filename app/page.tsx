@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Star, MapPin, Phone, Mail, Clock, Award, Users, Shield, ChevronLeft, ChevronRight } from "lucide-react"
+import { Star, MapPin, Phone, Mail, Clock, Award, Users, Shield, ChevronLeft, ChevronRight, Menu, X } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import WhatsAppIcon from "@/components/whatsapp-icon"
 import { BookingModal } from "@/components/booking-modal"
@@ -13,6 +13,7 @@ export default function DrGersonParisioLanding() {
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const [stats, setStats] = useState({ years: 0, patients: 0, satisfaction: 0 })
   const [hasAnimated, setHasAnimated] = useState(false)
@@ -195,10 +196,10 @@ export default function DrGersonParisioLanding() {
       <header className="bg-card/50 backdrop-blur-sm border-b border-border sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4 md:gap-12">
+            <div className="flex items-center gap-4 xl:gap-12">
               <div className="flex items-center gap-2 md:gap-3">
                 <img
-                  src="/images/design-mode/gerson%20%281%29.png"
+                  src="/images/design-mode/logo.png"
                   alt="Logo Dr. Gerson Parisio"
                   className="w-8 h-8 md:w-10 md:h-10 object-contain"
                 />
@@ -206,37 +207,67 @@ export default function DrGersonParisioLanding() {
                   Gerson Parisio
                 </h1>
               </div>
-              <nav className="hidden md:flex items-center gap-8">
-                <a href="#home" className="text-primary hover:text-secondary transition-colors">
+              <nav className="hidden xl:flex items-center gap-6 2xl:gap-8">
+                <a href="#home" className="text-primary hover:text-secondary transition-colors text-sm">
                   Home
                 </a>
-                <a href="#sobre" className="text-muted-foreground hover:text-primary transition-colors">
+                <a href="#sobre" className="text-muted-foreground hover:text-primary transition-colors text-sm">
                   Dr. Gerson Parisio
                 </a>
-                <a href="#clinica" className="text-muted-foreground hover:text-primary transition-colors">
+                <a href="#clinica" className="text-muted-foreground hover:text-primary transition-colors text-sm">
                   A Clínica
                 </a>
-                <a href="#procedimentos" className="text-muted-foreground hover:text-primary transition-colors">
+                <a href="#procedimentos" className="text-muted-foreground hover:text-primary transition-colors text-sm">
                   Procedimentos
                 </a>
-                <a href="#tecnologias" className="text-muted-foreground hover:text-primary transition-colors">
+                <a href="#tecnologias" className="text-muted-foreground hover:text-primary transition-colors text-sm">
                   Tecnologias
                 </a>
               </nav>
             </div>
-            <button
-              className="px-3 py-2 md:px-6 md:py-2 rounded-full shadow-sm transition-all hover:scale-105 text-white flex items-center gap-1 md:gap-2 text-sm md:text-base"
-              style={{ backgroundColor: "#191D25" }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#0f1318")}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#191D25")}
-              onClick={() => setIsBookingModalOpen(true)}
-            >
-              <WhatsAppIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">Agendar Consulta</span>
-              <span className="sm:hidden">Agendar</span>
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                className="px-3 py-2 xl:px-6 xl:py-2 rounded-full shadow-sm transition-all hover:scale-105 text-white flex items-center gap-1 xl:gap-2 text-sm"
+                style={{ backgroundColor: "#191D25" }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#0f1318")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#191D25")}
+                onClick={() => setIsBookingModalOpen(true)}
+              >
+                <WhatsAppIcon className="w-4 h-4" />
+                <span className="hidden sm:inline">Agendar Consulta</span>
+                <span className="sm:hidden">Agendar</span>
+              </button>
+              <button
+                className="xl:hidden p-2 rounded-md hover:bg-gray-100 transition-colors"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Menu"
+              >
+                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
         </div>
+        {isMobileMenuOpen && (
+          <div className="xl:hidden border-t border-border bg-card/95 backdrop-blur-sm">
+            <nav className="container mx-auto px-4 py-4 flex flex-col gap-4">
+              <a href="#home" onClick={() => setIsMobileMenuOpen(false)} className="text-primary hover:text-secondary transition-colors py-2 border-b border-border/50">
+                Home
+              </a>
+              <a href="#sobre" onClick={() => setIsMobileMenuOpen(false)} className="text-muted-foreground hover:text-primary transition-colors py-2 border-b border-border/50">
+                Dr. Gerson Parisio
+              </a>
+              <a href="#clinica" onClick={() => setIsMobileMenuOpen(false)} className="text-muted-foreground hover:text-primary transition-colors py-2 border-b border-border/50">
+                A Clínica
+              </a>
+              <a href="#procedimentos" onClick={() => setIsMobileMenuOpen(false)} className="text-muted-foreground hover:text-primary transition-colors py-2 border-b border-border/50">
+                Procedimentos
+              </a>
+              <a href="#tecnologias" onClick={() => setIsMobileMenuOpen(false)} className="text-muted-foreground hover:text-primary transition-colors py-2">
+                Tecnologias
+              </a>
+            </nav>
+          </div>
+        )}
       </header>
 
       {/* Hero Section */}
