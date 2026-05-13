@@ -1,0 +1,30 @@
+Crie um componente em React com Tailwind que seja um carrossel de procedimentos médicos.  
+
+Requisitos:
+1. O carrossel deve ter múltiplos slides, cada slide com:
+   - Um componente de comparação Antes/Depois com slider no meio.
+   - Um container de texto com título e descrição ao lado.
+
+2. O comparativo Antes/Depois deve ser um componente separado chamado `TextImageRevealSlider`, que recebe como props:
+   - `title`
+   - `description`
+   - `beforeImage`
+   - `afterImage`
+   O slider deve permitir arrastar para revelar a imagem "depois" sobre a "antes". Labels "Antes" e "Depois" devem estar nos cantos superiores.
+
+3. O carrossel deve ter um array de objetos com pelo menos 3 procedimentos, cada um com:
+   - `title`
+   - `description`
+   - `beforeImage`
+   - `afterImage`
+
+4. Ao trocar de slide, tanto o texto quanto as imagens do slider devem mudar.  
+   O botão "Próximo" deve avançar no array e, ao chegar no final, voltar ao primeiro.
+
+5. Layout responsivo:
+   - Em desktop: duas colunas (slider na esquerda, texto na direita).
+   - Em mobile: apenas uma coluna (slider em cima, texto embaixo).
+
+6. Estilo:
+   - Layout clean, com sombras suaves, cantos arredondados e espaçamento adequado.
+   - Botão estilizado com Tailwind: fundo azul (`bg-blue-600`), texto branco, hover mais escuro.
