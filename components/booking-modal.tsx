@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Checkbox } from "@/components/ui/checkbox"
 import WhatsAppIcon from "@/components/whatsapp-icon"
 import { submitLead } from "@/app/actions/submit-lead"
 
@@ -17,6 +18,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [noSusConfirmed, setNoSusConfirmed] = useState(false)
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/\D/g, "")
@@ -38,6 +40,11 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
+    if (!noSusConfirmed) {
+      alert("Para continuar, confirme que está ciente de que o Dr. Gerson não atende pelo SUS.")
+      return
+    }
+
     // Validate phone has exactly 11 digits
     const digitsOnly = phone.replace(/\D/g, "")
     if (digitsOnly.length !== 11) {
@@ -102,10 +109,22 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
               title="Digite um telefone com DDD + 9 dígitos (11 números no total)"
             />
           </div>
+          <div className="flex items-start gap-2">
+            <Checkbox
+              id="no-sus"
+              checked={noSusConfirmed}
+              onCheckedChange={(checked) => setNoSusConfirmed(checked === true)}
+              disabled={isSubmitting}
+              className="mt-0.5"
+            />
+            <Label htmlFor="no-sus" className="text-sm font-normal leading-snug cursor-pointer">
+              Estou ciente de que o Dr. Gerson não atende pelo SUS.
+            </Label>
+          </div>
           <Button 
             type="submit" 
             className="w-full bg-[#191D25] hover:bg-[#0f1318] text-white gap-2"
-            disabled={isSubmitting}
+            disabled={isSubmitting || !noSusConfirmed}
           >
             <WhatsAppIcon className="w-4 h-4" />
             {isSubmitting ? "Enviando..." : "Enviar e Agendar"}

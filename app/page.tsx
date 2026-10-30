@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import { Star, MapPin, Phone, Mail, Clock, Award, Users, Shield, ChevronLeft, ChevronRight, Menu, X } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import WhatsAppIcon from "@/components/whatsapp-icon"
@@ -11,19 +11,16 @@ export default function DrGersonParisioLanding() {
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0)
   const [procedureIndex, setProcedureIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
-  const [isTablet, setIsTablet] = useState(false)
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const [stats, setStats] = useState({ years: 0, patients: 0, satisfaction: 0 })
   const [hasAnimated, setHasAnimated] = useState(false)
   const statsRef = useRef<HTMLElement>(null)
-  const proceduresRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 640)
-      setIsTablet(window.innerWidth >= 640 && window.innerWidth < 1024)
     }
 
     handleResize()
@@ -118,17 +115,12 @@ export default function DrGersonParisioLanding() {
     },
   ]
 
-  const getTestimonialsPerPage = () => {
-    return isMobile ? 1 : 2
-  }
-
   const nextTestimonials = () => {
-    const perPage = getTestimonialsPerPage()
-    setCurrentTestimonialIndex((prev) => (prev + perPage >= testimonials.length ? 0 : prev + perPage))
+    setCurrentTestimonialIndex((prev) => (prev + 1) % testimonials.length)
   }
 
   const prevTestimonials = () => {
-    setCurrentTestimonialIndex((prev) => (prev - 1 + Math.ceil(testimonials.length / getTestimonialsPerPage())) % Math.ceil(testimonials.length / getTestimonialsPerPage()))
+    setCurrentTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
   }
 
   const procedures = [
@@ -173,21 +165,6 @@ export default function DrGersonParisioLanding() {
 
   const handlePrevProcedure = () => {
     setProcedureIndex((prev) => (prev - 1 + totalSlides) % totalSlides)
-  }
-
-  const prevProcedure = () => {
-    setProcedureIndex((prev) => (prev - 1 + procedures.length) % procedures.length)
-  }
-
-  const getVisibleCount = () => {
-    if (isMobile) return 1
-    if (isTablet) return 2
-    return 4
-  }
-
-  const getCardWidth = () => {
-    const visibleCount = getVisibleCount()
-    return 100 / visibleCount
   }
 
   return (
@@ -273,7 +250,7 @@ export default function DrGersonParisioLanding() {
       {/* Hero Section */}
       <section
         id="home"
-        className="relative bg-gradient-to-br from-card to-background py-20 md:py-32 lg:py-40 bg-cover bg-[60%_center] md:bg-center bg-no-repeat"
+        className="relative bg-gradient-to-br from-card to-background py-20 md:py-32 lg:py-40 bg-cover bg-[88%_center] md:bg-[center_20%] bg-no-repeat"
         style={{ backgroundImage: "url(/images/drgersonbg01.png)" }}
       >
         {/* Dark overlay for text readability */}
@@ -414,6 +391,9 @@ export default function DrGersonParisioLanding() {
                   <span className="text-xs md:text-sm">Horários Flexíveis</span>
                 </div>
               </div>
+              <p className="text-sm md:text-base font-medium text-[rgba(25,29,37,1)]">
+                Atendimento particular. O Dr. Gerson não atende pelo SUS.
+              </p>
               <Button
                 className="text-white px-4 md:px-6 py-2 rounded-full flex items-center gap-2 transition-transform hover:scale-105 w-full sm:w-auto"
                 style={{ backgroundColor: "#191D25" }}
@@ -597,14 +577,12 @@ export default function DrGersonParisioLanding() {
             <button
               onClick={prevTestimonials}
               className="absolute -left-6 md:-left-12 top-1/2 -translate-y-1/2 bg-[#191D25] hover:bg-[#0f1318] text-white p-3 md:p-4 rounded-full shadow-lg transition-colors z-10"
-              disabled={currentTestimonialIndex === 0}
             >
               <ChevronLeft className="w-6 h-6 md:w-7 md:h-7" />
             </button>
             <button
               onClick={nextTestimonials}
               className="absolute -right-6 md:-right-12 top-1/2 -translate-y-1/2 bg-[#191D25] hover:bg-[#0f1318] text-white p-3 md:p-4 rounded-full shadow-lg transition-colors z-10"
-              disabled={currentTestimonialIndex + 1 >= testimonials.length}
             >
               <ChevronRight className="w-6 h-6 md:w-7 md:h-7" />
             </button>
@@ -639,6 +617,9 @@ export default function DrGersonParisioLanding() {
               </p>
               <p className="text-sm md:text-base text-primary-foreground/80">
                 Cirurgia Plástica com segurança, cuidado e atenção aos detalhes.
+              </p>
+              <p className="text-xs md:text-sm text-primary-foreground/60">
+                Atendimento particular. Não atendemos pelo SUS.
               </p>
             </div>
             <div className="space-y-3 md:space-y-4">
