@@ -23,7 +23,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Dr. Gerson Parisio - Cirurgião Plástico",
   description:
-    "Cirurgia Plástica com Segurança, Cuidado e Atenção aos Detalhes. Atendimento exclusivo e personalizado.",
+    "Cirurgia Plástica com Segurança, Cuidado e Atenção aos Detalhes. Atendimento particular, exclusivo e personalizado.",
   generator: "v0.app",
 }
 
