@@ -18,7 +18,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [noSusConfirmed, setNoSusConfirmed] = useState(false)
+  const [particularConfirmed, setParticularConfirmed] = useState(false)
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/\D/g, "")
@@ -40,8 +40,8 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
-    if (!noSusConfirmed) {
-      alert("Para continuar, confirme que está ciente de que o Dr. Gerson não atende pelo SUS.")
+    if (!particularConfirmed) {
+      alert("Para continuar, confirme que está ciente de que o atendimento do Dr. Gerson é particular.")
       return
     }
 
@@ -111,20 +111,20 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
           </div>
           <div className="flex items-start gap-2">
             <Checkbox
-              id="no-sus"
-              checked={noSusConfirmed}
-              onCheckedChange={(checked) => setNoSusConfirmed(checked === true)}
+              id="particular"
+              checked={particularConfirmed}
+              onCheckedChange={(checked) => setParticularConfirmed(checked === true)}
               disabled={isSubmitting}
               className="mt-0.5"
             />
-            <Label htmlFor="no-sus" className="text-sm font-normal leading-snug cursor-pointer">
-              Estou ciente de que o Dr. Gerson não atende pelo SUS.
+            <Label htmlFor="particular" className="text-sm font-normal leading-snug cursor-pointer">
+              Estou ciente de que o atendimento do Dr. Gerson é particular.
             </Label>
           </div>
           <Button 
             type="submit" 
             className="w-full bg-[#191D25] hover:bg-[#0f1318] text-white gap-2"
-            disabled={isSubmitting || !noSusConfirmed}
+            disabled={isSubmitting || !particularConfirmed}
           >
             <WhatsAppIcon className="w-4 h-4" />
             {isSubmitting ? "Enviando..." : "Enviar e Agendar"}

@@ -392,7 +392,7 @@ export default function DrGersonParisioLanding() {
                 </div>
               </div>
               <p className="text-sm md:text-base font-medium text-[rgba(25,29,37,1)]">
-                Atendimento particular. O Dr. Gerson não atende pelo SUS.
+                Atendimento particular.
               </p>
               <Button
                 className="text-white px-4 md:px-6 py-2 rounded-full flex items-center gap-2 transition-transform hover:scale-105 w-full sm:w-auto"
@@ -619,7 +619,7 @@ export default function DrGersonParisioLanding() {
                 Cirurgia Plástica com segurança, cuidado e atenção aos detalhes.
               </p>
               <p className="text-xs md:text-sm text-primary-foreground/60">
-                Atendimento particular. Não atendemos pelo SUS.
+                Atendimento particular.
               </p>
             </div>
             <div className="space-y-3 md:space-y-4">
